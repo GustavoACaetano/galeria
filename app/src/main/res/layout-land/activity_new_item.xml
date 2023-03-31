@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewItemActivity">
+    tools:context="caetano.alves.galeria.activity.NewItemActivity">
 
     <ImageView
         android:id="@+id/imvFotoPreview"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
     <ImageButton
-        android:id="@+id/imbCl"
+        android:id="@+id/imbCI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
