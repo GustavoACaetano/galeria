@@ -1,6 +1,9 @@
 package caetano.alves.galeria.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +37,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(i, NEW_ITEM_REQUEST);
             }
         });
+
+        RecyclerView rvItens = findViewById(R.id.rvItens);
+
+        myAdapter = new MyAdapter(this, itens);
+        rvItens.setAdapter(myAdapter);
+
+        rvItens.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvItens.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
+        rvItens.addItemDecoration(dividerItemDecoration);
     }
 
     @Override
