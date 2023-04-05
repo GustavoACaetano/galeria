@@ -25,36 +25,36 @@ public class NewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
 
-        ImageButton imbCI = findViewById(R.id.imbCI);
-        imbCI.setOnClickListener(new View.OnClickListener() {
+        ImageButton imbCI = findViewById(R.id.imbCI); // Capturando o botão de adicionar imagem
+        imbCI.setOnClickListener(new View.OnClickListener() { // Configurando o clique do botão
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, PHOTO_PICKER_REQUEST);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT); // Criando intenção para abrir um documento do aparelho
+                photoPickerIntent.setType("image/*"); // Selecionando o tipo de documento como qualquer imagem
+                startActivityForResult(photoPickerIntent, PHOTO_PICKER_REQUEST); // Iniciando a intenção e o resultado será a foto selecionada
             }
         });
 
-        Button btnAddItem = findViewById(R.id.btnAddItem);
-        btnAddItem.setOnClickListener(new View.OnClickListener() {
+        Button btnAddItem = findViewById(R.id.btnAddItem); // Capturando o botão de adicionar um item (foto, titulo e descriçao)
+        btnAddItem.setOnClickListener(new View.OnClickListener() { // Configurando o clique do botão
             @Override
             public void onClick(View v) {
-                if (photoSelected == null) {
-                    Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show();
+                if (photoSelected == null) { // Checando se alguma foto foi selecionada
+                    Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show(); // Mensagem de erro caso não tenha foto
                     return;
                 }
 
-                EditText etTitle = findViewById(R.id.etTitle);
-                String title = etTitle.getText().toString();
-                if (title.isEmpty()) {
-                    Toast.makeText(NewItemActivity.this, "É necessário inserir um título", Toast.LENGTH_LONG).show();
+                EditText etTitle = findViewById(R.id.etTitle); // Capturando o edit text do titulo
+                String title = etTitle.getText().toString(); // Armazenando o texto armazenado no campo do titulo
+                if (title.isEmpty()) { // Checando se tinha algo escrito
+                    Toast.makeText(NewItemActivity.this, "É necessário inserir um título", Toast.LENGTH_LONG).show(); // Mensagem de erro caso não tenha nada escrito
                     return;
                 }
 
-                EditText etDesc = findViewById(R.id.etDesc);
-                String description = etDesc.getText().toString();
-                if (description.isEmpty()) {
-                    Toast.makeText(NewItemActivity.this, "É necessário inserir uma descrição", Toast.LENGTH_LONG).show();
+                EditText etDesc = findViewById(R.id.etDesc); // Capturando o edit text de descrição
+                String description = etDesc.getText().toString(); // Armazenando o texto armazenado no campo de descriçao
+                if (description.isEmpty()) { // Checando se tinha algo escrito
+                    Toast.makeText(NewItemActivity.this, "É necessário inserir uma descrição", Toast.LENGTH_LONG).show(); // Mensagem de erro caso não tenha nada escrito
                     return;
                 }
 

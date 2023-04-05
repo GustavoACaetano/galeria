@@ -20,7 +20,7 @@ import caetano.alves.galeria.adapter.MyAdapter;
 import caetano.alves.galeria.model.MyItem;
 
 public class MainActivity extends AppCompatActivity {
-    static int NEW_ITEM_REQUEST =1;
+    static int NEW_ITEM_REQUEST =1; // Identificador da chamada da activity for result
     List<MyItem> itens = new ArrayList<>();
     MyAdapter myAdapter;
 
@@ -29,16 +29,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fabAddItem = findViewById(R.id.fabAddNewItem);
-        fabAddItem.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabAddItem = findViewById(R.id.fabAddNewItem); // Capturando o botão flutuante de adicionar novo item
+        fabAddItem.setOnClickListener(new View.OnClickListener() { // Configurando o clique do botão para levar para nova tela
             @Override
             public void onClick(View view) {
-                Intent i = new Intent (MainActivity.this, NewItemActivity.class);
-                startActivityForResult(i, NEW_ITEM_REQUEST);
+                Intent i = new Intent (MainActivity.this, NewItemActivity.class); // Criar intenção de ir para nova tela
+                startActivityForResult(i, NEW_ITEM_REQUEST); // Iniciar a intenção esperando uma resposta
             }
         });
 
-        RecyclerView rvItens = findViewById(R.id.rvItens);
+        RecyclerView rvItens = findViewById(R.id.rvItens); // Capturando o recycler view
 
         myAdapter = new MyAdapter(this, itens);
         rvItens.setAdapter(myAdapter);
