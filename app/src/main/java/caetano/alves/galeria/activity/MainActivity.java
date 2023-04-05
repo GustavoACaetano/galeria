@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 myItem.description = data.getStringExtra("description");
                 myItem.photo = data.getData();
                 itens.add(myItem);
+                myAdapter.notifyItemInserted(itens.size()-1);
             }
         }
     }
