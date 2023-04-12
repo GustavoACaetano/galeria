@@ -58,12 +58,12 @@ public class NewItemActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent i = new Intent();
-                i.setData(photoSelected);
-                i.putExtra("title", title);
-                i.putExtra("description", description);
-                setResult(Activity.RESULT_OK, i);
-                finish();
+                Intent i = new Intent(); // Criando a intent para voltar a outra tela com o resultado/informações
+                i.setData(photoSelected); // Colocando a foto escolhida como informação da intenção
+                i.putExtra("title", title); // Adicionando o título no dicionário
+                i.putExtra("description", description); // Adicionando a descrição no dicionário
+                setResult(Activity.RESULT_OK, i); // Informando que o resultado terá dados sendo enviados
+                finish(); // Fechando a activity. A intent será executada e a outra tela volta para principal
             }
         });
     }
@@ -71,7 +71,7 @@ public class NewItemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PHOTO_PICKER_REQUEST){
+        if (requestCode == PHOTO_PICKER_REQUEST){ 
             if (resultCode == Activity.RESULT_OK){
                 photoSelected = data.getData();
                 ImageView imvFotoPreview = findViewById(R.id.imvFotoPreview);

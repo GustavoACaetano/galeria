@@ -16,9 +16,10 @@ import caetano.alves.galeria.activity.MainActivity;
 import caetano.alves.galeria.model.MyItem;
 
 public class MyAdapter extends RecyclerView.Adapter {
-    MainActivity mainActivity;
-    List<MyItem> itens;
+    MainActivity mainActivity; // Tela principal
+    List<MyItem> itens; // Lista dos itens adicionados
 
+    //Construtor da classe
     public MyAdapter(MainActivity mainActivity, List<MyItem> itens){
        this.mainActivity = mainActivity;
        this.itens = itens;
@@ -27,14 +28,14 @@ public class MyAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mainActivity);
-        View v = inflater.inflate(R.layout.item_list,parent,false);
-        return new MyViewHolder(v);
+        LayoutInflater inflater = LayoutInflater.from(mainActivity); // Criando um inflater pra ler o XML da pagina inicial e criar os elementos de interface
+        View v = inflater.inflate(R.layout.item_list,parent,false); // Criando os elementos de interface
+        return new MyViewHolder(v); // Retornando o holder com os elementos da view
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MyItem myItem = itens.get(position);
+        MyItem myItem = itens.get(position); // Selecionando o item que será atualizado/criado
 
         View v = holder.itemView;
 

@@ -21,7 +21,7 @@ import caetano.alves.galeria.model.MyItem;
 
 public class MainActivity extends AppCompatActivity {
     static int NEW_ITEM_REQUEST =1; // Identificador da chamada da activity for result
-    List<MyItem> itens = new ArrayList<>();
+    List<MyItem> itens = new ArrayList<>(); // Lista dos itens adicionados
     MyAdapter myAdapter;
 
     @Override
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView rvItens = findViewById(R.id.rvItens); // Capturando o recycler view
 
-        myAdapter = new MyAdapter(this, itens);
-        rvItens.setAdapter(myAdapter);
+        myAdapter = new MyAdapter(this, itens); // Criando um adapter da tela principal com os itens já criados
+        rvItens.setAdapter(myAdapter); // Colocando o adapter para a recycle view
 
         rvItens.setHasFixedSize(true);
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == NEW_ITEM_REQUEST) {
+        if(requestCode == NEW_ITEM_REQUEST) { // Verificando se a resposta veio da tela
             if(resultCode == Activity.RESULT_OK) {
                 MyItem myItem = new MyItem();
                 myItem.title = data.getStringExtra("title");
