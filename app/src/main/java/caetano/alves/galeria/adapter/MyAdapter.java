@@ -37,20 +37,20 @@ public class MyAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyItem myItem = itens.get(position); // Selecionando o item que será atualizado/criado
 
-        View v = holder.itemView;
+        View v = holder.itemView; // Capturando o bloco do item
 
-        ImageView imvPhoto = v.findViewById(R.id.imvPhoto);
-        imvPhoto.setImageURI(myItem.photo);
+        ImageView imvPhoto = v.findViewById(R.id.imvPhoto); // Capturando o elemento da tela para adicionar a imagem
+        imvPhoto.setImageURI(myItem.photo); // Adicionando a imagem no elemento de tela
 
-        TextView tvTitle = v.findViewById(R.id.tvTitle);
-        tvTitle.setText(myItem.title);
+        TextView tvTitle = v.findViewById(R.id.tvTitle); // Capturando o elemento da tela para adicionar o título
+        tvTitle.setText(myItem.title); // Adicionando o título no elemento de tela
 
-        TextView tvDesc = v.findViewById(R.id.tvDesc);
-        tvDesc.setText(myItem.description);
+        TextView tvDesc = v.findViewById(R.id.tvDesc); // Capturando o elemento de tela para adicionar a descrição
+        tvDesc.setText(myItem.description); // Adicionando a descrição
     }
 
     @Override
     public int getItemCount() {
         return itens.size();
-    }
+    } // Retorna a quantidade de itens
 }

@@ -71,11 +71,11 @@ public class NewItemActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PHOTO_PICKER_REQUEST){ 
-            if (resultCode == Activity.RESULT_OK){
-                photoSelected = data.getData();
-                ImageView imvFotoPreview = findViewById(R.id.imvFotoPreview);
-                imvFotoPreview.setImageURI(photoSelected);
+        if (requestCode == PHOTO_PICKER_REQUEST){ // Confere qual foi a chamada do start activity on result
+            if (resultCode == Activity.RESULT_OK){ // Confere se o retorno da activity deu certo
+                photoSelected = data.getData(); // Armazena a imagem escolhida
+                ImageView imvFotoPreview = findViewById(R.id.imvFotoPreview); // Captura o elemento para preview da imagem na tela
+                imvFotoPreview.setImageURI(photoSelected); // Define a imagem selecionada no elemento do preview
 
             }
         }

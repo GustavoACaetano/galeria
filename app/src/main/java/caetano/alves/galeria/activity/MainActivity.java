@@ -22,7 +22,7 @@ import caetano.alves.galeria.model.MyItem;
 public class MainActivity extends AppCompatActivity {
     static int NEW_ITEM_REQUEST =1; // Identificador da chamada da activity for result
     List<MyItem> itens = new ArrayList<>(); // Lista dos itens adicionados
-    MyAdapter myAdapter;
+    MyAdapter myAdapter; // Adapter para recicler view
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, itens); // Criando um adapter da tela principal com os itens já criados
         rvItens.setAdapter(myAdapter); // Colocando o adapter para a recycle view
 
-        rvItens.setHasFixedSize(true);
+        rvItens.setHasFixedSize(true); // Colocando o tamanho como fixo
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvItens.setLayoutManager(layoutManager);
@@ -55,14 +55,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == NEW_ITEM_REQUEST) { // Verificando se a resposta veio da tela
+        if(requestCode == NEW_ITEM_REQUEST) {
             if(resultCode == Activity.RESULT_OK) {
-                MyItem myItem = new MyItem();
+                MyItem myItem = new MyItem(); // Criando entidade para armazenar os dados do item
+
+                // Armazenando as informações no item
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
                 myItem.photo = data.getData();
-                itens.add(myItem);
-                myAdapter.notifyItemInserted(itens.size()-1);
+
+                itens.add(myItem); // Adicionando o item na lista de itens
+                myAdapter.notifyItemInserted(itens.size()-1); // Avisando o adapter do item incluido para ser exibido
             }
         }
     }
