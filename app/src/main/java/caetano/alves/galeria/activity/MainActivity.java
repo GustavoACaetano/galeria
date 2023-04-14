@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, itens); // Criando um adapter da tela principal com os itens já criados
         rvItens.setAdapter(myAdapter); // Colocando o adapter para a recycle view
 
-        rvItens.setHasFixedSize(true); // Colocando o tamanho como fixo
+        rvItens.setHasFixedSize(true); // Avisa que não há variação de tamanho entre os itens
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        rvItens.setLayoutManager(layoutManager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // Criando um gerenciador de layout linear
+        rvItens.setLayoutManager(layoutManager); // Colocando o gerenciador no recycler view
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
-        rvItens.addItemDecoration(dividerItemDecoration);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL); // Criando um decorador para separar os itens
+        rvItens.addItemDecoration(dividerItemDecoration); // Adicionando o decorador no recycler view
     }
 
     @Override
