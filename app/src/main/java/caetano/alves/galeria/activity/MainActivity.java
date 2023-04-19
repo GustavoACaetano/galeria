@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import caetano.alves.galeria.R;
 import caetano.alves.galeria.adapter.MyAdapter;
 import caetano.alves.galeria.model.MyItem;
+import caetano.alves.galeria.model.Util;
 
 public class MainActivity extends AppCompatActivity {
     static int NEW_ITEM_REQUEST =1; // Identificador da chamada da activity for result
@@ -62,7 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 // Armazenando as informações no item
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
-                myItem.photo = data.getData();
+                // Capturando o URI da imagem pra transformar em bitmap
+                Uri selectedPhotoURI = data.getData();
+
+                try { // Usando o try pra capturar um possível erro de não enc
+                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 100, 100); // Gravando o bitmap da imagem
+                    myItem.photo = photo; // Armazenando a imagem no item
+                } catch (FileNotFoundException e) { // Capturando o erro
+                    e.printStackTrace();
+                }
 
                 itens.add(myItem); // Adicionando o item na lista de itens
                 myAdapter.notifyItemInserted(itens.size()-1); // Avisando o adapter do item incluido para ser exibido

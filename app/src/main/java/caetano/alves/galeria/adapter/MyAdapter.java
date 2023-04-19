@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         View v = holder.itemView; // Capturando o bloco do item
 
         ImageView imvPhoto = v.findViewById(R.id.imvPhoto); // Capturando o elemento da tela para adicionar a imagem
-        imvPhoto.setImageURI(myItem.photo); // Adicionando a imagem no elemento de tela
+        imvPhoto.setImageBitmap(myItem.photo); // Adicionando a imagem no elemento de tela
 
         TextView tvTitle = v.findViewById(R.id.tvTitle); // Capturando o elemento da tela para adicionar o título
         tvTitle.setText(myItem.title); // Adicionando o título no elemento de tela
