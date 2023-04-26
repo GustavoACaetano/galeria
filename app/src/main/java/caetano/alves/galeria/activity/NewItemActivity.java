@@ -20,7 +20,6 @@ import caetano.alves.galeria.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
     static int PHOTO_PICKER_REQUEST = 1;
-    Uri photoSelected = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,8 @@ public class NewItemActivity extends AppCompatActivity {
         btnAddItem.setOnClickListener(new View.OnClickListener() { // Configurando o clique do botão
             @Override
             public void onClick(View v) {
-                if (photoSelected == null) { // Checando se alguma foto foi selecionada
+                Uri selectPhotoLocation = vm.getSelectedPhotoLocation();
+                if (selectPhotoLocation == null) { // Checando se alguma foto foi selecionada
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show(); // Mensagem de erro caso não tenha foto
                     return;
                 }
@@ -71,7 +71,7 @@ public class NewItemActivity extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(); // Criando a intent para voltar a outra tela com o resultado/informações
-                i.setData(photoSelected); // Colocando a foto escolhida como informação da intenção
+                i.setData(selectPhotoLocation); // Colocando a foto escolhida como informação da intenção
                 i.putExtra("title", title); // Adicionando o título no dicionário
                 i.putExtra("description", description); // Adicionando a descrição no dicionário
                 setResult(Activity.RESULT_OK, i); // Informando que o resultado terá dados sendo enviados
@@ -85,7 +85,7 @@ public class NewItemActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_PICKER_REQUEST){ // Confere qual foi a chamada do start activity on result
             if (resultCode == Activity.RESULT_OK){ // Confere se o retorno da activity deu certo
-                photoSelected = data.getData(); // Armazena a imagem escolhida
+                Uri photoSelected = data.getData(); // Armazena a imagem escolhida
                 ImageView imvFotoPreview = findViewById(R.id.imvFotoPreview); // Captura o elemento para preview da imagem na tela
                 imvFotoPreview.setImageURI(photoSelected); // Define a imagem selecionada no elemento do preview
 
