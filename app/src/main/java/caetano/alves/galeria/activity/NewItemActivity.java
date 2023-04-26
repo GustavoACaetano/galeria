@@ -2,6 +2,7 @@ package caetano.alves.galeria.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import caetano.alves.galeria.R;
+import caetano.alves.galeria.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
     static int PHOTO_PICKER_REQUEST = 1;
@@ -24,6 +26,16 @@ public class NewItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
+
+        NewItemActivityViewModel vm = new ViewModelProvider( this ).get(NewItemActivityViewModel.class ); // Obtendo o view model da new activity
+
+        Uri selectPhotoLocation = vm.getSelectedPhotoLocation(); // Recebendo o URI guardado dentro do View Model
+
+        if(selectPhotoLocation != null) { // Se a foto foi escolhida antes de rotacionar a tela
+            ImageView imvfotoPreview = findViewById(R.id.imvFotoPreview); // Capturando o preview da imagem
+            imvfotoPreview.setImageURI(selectPhotoLocation); // Definindo a foto no preview
+        }
+
 
         ImageButton imbCI = findViewById(R.id.imbCI); // Capturando o botão de adicionar imagem
         imbCI.setOnClickListener(new View.OnClickListener() { // Configurando o clique do botão
@@ -76,6 +88,9 @@ public class NewItemActivity extends AppCompatActivity {
                 photoSelected = data.getData(); // Armazena a imagem escolhida
                 ImageView imvFotoPreview = findViewById(R.id.imvFotoPreview); // Captura o elemento para preview da imagem na tela
                 imvFotoPreview.setImageURI(photoSelected); // Define a imagem selecionada no elemento do preview
+
+                NewItemActivityViewModel vm = new ViewModelProvider( this).get(NewItemActivityViewModel.class); // Obtendo o View Model da NewActivity
+                vm.setSelectedPhotoLocation(photoSelected); // Armazenando o URI da imagem selecionada
 
             }
         }

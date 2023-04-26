@@ -1,6 +1,8 @@
 package caetano.alves.galeria.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +22,12 @@ import java.util.List;
 
 import caetano.alves.galeria.R;
 import caetano.alves.galeria.adapter.MyAdapter;
+import caetano.alves.galeria.model.MainActivityViewModel;
 import caetano.alves.galeria.model.MyItem;
 import caetano.alves.galeria.model.Util;
 
 public class MainActivity extends AppCompatActivity {
     static int NEW_ITEM_REQUEST =1; // Identificador da chamada da activity for result
-    List<MyItem> itens = new ArrayList<>(); // Lista dos itens adicionados
     MyAdapter myAdapter; // Adapter para recicler view
 
     @Override
@@ -44,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView rvItens = findViewById(R.id.rvItens); // Capturando o recycler view
 
-        myAdapter = new MyAdapter(this, itens); // Criando um adapter da tela principal com os itens já criados
+        MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class); // View Model de main activity é obtido
+        List<MyItem> itens = vm.getItens(); // Lista obtida do view model
+
+        myAdapter = new MyAdapter(this, itens); // Criando um adapter da tela principal com os itens recebidos do view model
         rvItens.setAdapter(myAdapter); // Colocando o adapter para a recycle view
 
         rvItens.setHasFixedSize(true); // Avisa que não há variação de tamanho entre os itens
@@ -76,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                itens.add(myItem); // Adicionando o item na lista de itens
+                MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class); // View Model de main activity é obtido
+                List<MyItem> itens = vm.getItens(); // Lista obtida do view model
+
+                itens.add(myItem); // Adicionando o item na lista
                 myAdapter.notifyItemInserted(itens.size()-1); // Avisando o adapter do item incluido para ser exibido
             }
         }
